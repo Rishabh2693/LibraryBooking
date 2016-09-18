@@ -160,7 +160,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  autoprefixer-rails (~> 6.4, >= 6.4.1.1)
+  autoprefixer-rails (~> 6.4, >= 6.4.1)
   bootstrap-sass
   byebug
   coffee-rails (~> 4.2)

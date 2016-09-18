@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bootstrap-sass'
-gem 'autoprefixer-rails', '~> 6.4', '>= 6.4.1.1'
+gem 'autoprefixer-rails', '~> 6.4', '>= 6.4.1'
 #gem 'bootstrap', '~> 4.0.0.alpha4'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'static_pages/home'
+  #get 'library_member/new'
 
+  get 'static_pages/home'
+  get  '/signup',  to: 'library_member#new'
   get 'static_pages/help'
   root 'static_pages#home'
 
