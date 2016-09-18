@@ -1,0 +1,20 @@
+<% provide(:title, 'All Library Members') %>
+<h1>All Library Members</h1>
+
+<ul class="library_members">
+  <% @library_members.each do |library_member| %>
+      <li>
+        <%= link_to library_member.name, library_member %>
+        <%= library_member.email %>
+        <% if library_member.admin %>
+          <%= "Admin" %>
+            <% else %>
+        <%= "Member" %>
+            <% end %>
+        <% if current_user.admin? && !current_user?(library_member) %>
+            | <%= link_to "delete", library_member, method: :delete,
+                          data: { confirm: "You sure?" } %>
+        <% end %>
+      </li>
+  <% end %>
+</ul>
