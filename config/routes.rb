@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
+  get '/roomhistory/:id', to: 'bookings#roomhistory',  via: :get, as: :room_history
+  get '/userhistory/:id', to: 'bookings#userhistory', via: :get, as: :user_history
   resources :bookings
   resources :rooms
   get 'sessions/new'
-
   #get 'library_members/new'
   resources :library_members
   get 'static_pages/home'

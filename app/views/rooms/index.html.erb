@@ -21,6 +21,7 @@
         <td><%= link_to 'Show', room %></td>
         <td><%= link_to 'Edit', edit_room_path(room) %></td>
         <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'History', room_history_path(room) %></td>
       </tr>
     <% end %>
   </tbody>
