@@ -21,6 +21,12 @@ class BookingsController < ApplicationController
   def edit
   end
 
+  def roomhistory
+    @history = Booking.where(room_id: params[:id])
+  end
+  def userhistory
+    @history = Booking.where(library_member_id: params[:id])
+  end
   # POST /bookings
   # POST /bookings.json
   def create
