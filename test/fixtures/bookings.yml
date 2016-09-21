@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start: 2016-09-20 20:12:04
+  end: 2016-09-20 20:12:04
+  room: one
+  library_member: one
+
+two:
+  start: 2016-09-20 20:12:04
+  end: 2016-09-20 20:12:04
+  room: two
+  library_member: two
