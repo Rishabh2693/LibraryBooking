@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :bookings
+  resources :rooms
   get 'sessions/new'
 
   #get 'library_members/new'
