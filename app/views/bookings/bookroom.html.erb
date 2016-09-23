@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+<%if @rooms.empty? %>
+    <p>There are no rooms.</p>
+<%end%>
+<h1>Rooms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Room number</th>
+      <th>Size</th>
+      <th>Building</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% params[:rooms].each do |room| %>
+      <tr>
+        <td><%= room.room_number %></td>
+        <td><%= room.size %></td>
+        <td><%= room.building %></td>
+        <td><%= link_to 'Book',edit_room_path(room) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back', bookings_search_path %>

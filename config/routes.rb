@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+
+  get 'bookings/search'
+  post 'bookings/search', to: 'bookings#search_post'
+  get 'bookings/bookroom'
   get '/roomhistory/:id', to: 'bookings#roomhistory',  via: :get, as: :room_history
   get '/userhistory/:id', to: 'bookings#userhistory', via: :get, as: :user_history
   resources :bookings
