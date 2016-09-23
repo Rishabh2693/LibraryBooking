@@ -18,8 +18,8 @@
       <tr>
         <td><%= booking.start %></td>
         <td><%= booking.end %></td>
-        <td><%= booking.room %></td>
-        <td><%= booking.library_member %></td>
+        <td><%= booking.room.room_number %></td>
+        <td><%= booking.library_member.email %></td>
         <td><%= link_to 'Show', booking %></td>
         <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
         <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Booking', new_booking_path %>
+<%= link_to 'New Booking', bookings_search_path %>
