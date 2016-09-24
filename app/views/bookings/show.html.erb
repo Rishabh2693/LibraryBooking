@@ -12,13 +12,13 @@
 
 <p>
   <strong>Room:</strong>
-  <%= @booking.room %>
+  <%= @booking.room.room_number %>
 </p>
 
 <p>
   <strong>Library member:</strong>
-  <%= @booking.library_member %>
+  <%= @booking.library_member.email %>
 </p>
 
 <%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', bookings_path %>
+<%= link_to 'Back', bookings_search_path %>
