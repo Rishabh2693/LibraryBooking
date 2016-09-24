@@ -26,27 +26,12 @@ class BookingsController < ApplicationController
     if params.has_key?(:start_time)
       @search_start_time = params[:start_time]
       start_time = DateTime.new(@search_start_time['year'].to_i ,@search_start_time['month'].to_i ,@search_start_time['day'].to_i ,@search_start_time['hour'].to_i ,00,00)
+      @search_start_time = DateTime.new(@search_start_time['year'].to_i ,@search_start_time['month'].to_i ,@search_start_time['day'].to_i ,@search_start_time['hour'].to_i ,00,00)
       @search_end_time = params[:end_time]
       end_time = DateTime.new(@search_end_time['year'].to_i ,@search_end_time['month'].to_i ,@search_end_time['day'].to_i ,@search_end_time['hour'].to_i ,00,00)
-      @rooms = Room.joins("LEFT OUTER JOIN bookings on rooms.id = bookings.room_id").where("((bookings.start not BETWEEN ? AND ?) AND (bookings.end not BETWEEN ? AND ?)) or bookings.start is null", start_time, end_time, start_time, end_time)
+      @search_end_time = DateTime.new(@search_end_time['year'].to_i ,@search_end_time['month'].to_i ,@search_end_time['day'].to_i ,@search_end_time['hour'].to_i ,00,00)
+      @rooms = Room.joins("LEFT OUTER JOIN bookings on rooms.id = bookings.room_id").where("((bookings.start not BETWEEN ? AND ?) AND (bookings.end not BETWEEN ? AND ?)) or bookings.start is null", start_time, end_time, start_time, end_time).distinct
     end
-  end
-
-  def search_post
-    @search_start_time = params[:start_time]
-    start_time = DateTime.new(@search_start_time['year'].to_i ,@search_start_time['month'].to_i ,@search_start_time['day'].to_i ,@search_start_time['hour'].to_i ,00,00)
-    @search_end_time = params[:end_time]
-    end_time = DateTime.new(@search_end_time['year'].to_i ,@search_end_time['month'].to_i ,@search_end_time['day'].to_i ,@search_end_time['hour'].to_i ,00,00)
-    @rooms = Room.joins("LEFT OUTER JOIN bookings on rooms.id = bookings.room_id") #.where(start_time: ()..Time.now.midnight)
-
-
-    # respond_to do |format|
-    #   format.html { redirect_to @temp_rooms }
-    #   format.json { render bookings_bookroom_path, status: :ok, location: @temp_rooms }
-    # end
-
-
-    #redirect_to(bookings_bookroom_path(:rooms => @rooms))
   end
 
   def bookroom
@@ -62,6 +47,8 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
+    tmep = LibraryMember.find_by(email: booking_params[:library_member_id])
+    params[:booking][:library_member_id] = tmep.id
     @booking = Booking.new(booking_params)
 
     respond_to do |format|
@@ -69,7 +56,7 @@ class BookingsController < ApplicationController
         format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
         format.json { render :show, status: :created, location: @booking }
       else
-        format.html { render :new }
+        format.html { render :search }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
     end

@@ -3,17 +3,25 @@
 
     <div class="field">
       <%= label_tag :"start time" %>
-      <%=select_datetime(Time.now, :discard_minute => true, :prefix => :start_time) %>
+      <% if defined?(@search_start_time) %>
+          <%=select_datetime(@search_start_time, :discard_minute => true, :prefix => :start_time) %>
+      <% else %>
+        <%=select_datetime(Time.now, :discard_minute => true, :prefix => :start_time) %>
+      <% end %>
       <%= label_tag :"end time" %>
-      <%=select_datetime(Time.now, :discard_minute => true, :prefix => :end_time) %>
+      <% if defined?(@search_end_time) %>
+          <%=select_datetime(@search_end_time, :discard_minute => true, :prefix => :end_time) %>
+      <% else %>
+          <%=select_datetime(Time.now, :discard_minute => true, :prefix => :end_time) %>
+      <% end %>
     </div>
     <%= submit_tag "Search" %>
 <% end %>
 
 <p id="notice"><%= notice %></p>
-<%if @rooms.empty? %>
+<%if not defined?(@rooms) or @rooms.empty? %>
     <p>There are no rooms.</p>
-<%end%>
+<%else%>
 <h1>Rooms</h1>
 
 <table>
@@ -32,12 +40,12 @@
         <td><%= room.room_number %></td>
         <td><%= room.size %></td>
         <td><%= room.building %></td>
-        <td><%= link_to 'Book',new_booking_path(:room => room, :start_time => params['start_time'], :end_time => params['end_time']) %></td>
+        <td><%= link_to 'Book',new_booking_path(:room => room, :start_time => @search_start_time, :end_time => @search_end_time) %></td>
       </tr>
   <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>
 
 

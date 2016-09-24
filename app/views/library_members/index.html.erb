@@ -11,7 +11,7 @@
             <% else %>
         <%= "Member" %>
             <% end %>
-        <% if current_user.admin? && !current_user?(library_member) %>
+        <% if current_user.admin? && !current_user?(library_member) && library_member.id != 1%>
             | <%= link_to "delete", library_member, method: :delete,
                           data: { confirm: "You sure?" } %>
         <% end %>
