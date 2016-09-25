@@ -27,6 +27,7 @@ class LibraryMembersController < ApplicationController
     end
     @library_member = LibraryMember.new(library_member_params)
     if @library_member.save
+      UserNotifier.room_booking_email(@library_member).deliver
       log_in @library_member
       flash[:success] = "Welcome to the NC State Library App!"
       redirect_to @library_member
