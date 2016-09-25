@@ -1,0 +1,111 @@
+<h1> Search for available rooms</h1>
+<%= form_tag bookings_search_path, :method => 'get' do %>
+
+    <div class="field">
+      <%= label_tag :"start time" %>
+      <% if defined?(@search_start_time) %>
+          <%= select_datetime(@search_start_time, :discard_minute => true, :prefix => :start_time) %>
+      <% else %>
+        <%= select_datetime(Time.now, :max => Time.now + 7.days, :discard_minute => true, :prefix => :start_time) %>
+      <% end %>
+</div>
+    <div>
+      <%= label_tag :"Duration" %>
+      <% if defined?(@duration) and @duration == '2' %>
+          1 hour
+          <%= radio_button_tag :duration, '1' %> 2 hour
+          <%= radio_button_tag :duration, '2', true %>
+      <% else %>
+      1 hour
+      <%= radio_button_tag :duration, '1', true  %> 2 hour
+      <%= radio_button_tag :duration, '2' %>
+      <% end %>
+
+</div>
+    <div>
+      <%= label_tag :"Size" %>
+      <% if defined?(@size) and @size == 'Small' %>
+          Small (4 members)
+          <%= radio_button_tag :size, 'Small', true %> Medium (6 members)
+          <%= radio_button_tag :size, 'Medium' %> Large (12 members)
+          <%= radio_button_tag :size, 'Large' %> Any
+          <%= radio_button_tag :size, 'Any' %>
+      <% elsif defined?(@size) and @size == 'Medium' %>
+          Small (4 members)
+          <%= radio_button_tag :size, 'Small' %> Medium (6 members)
+          <%= radio_button_tag :size, 'Medium', true %> Large (12 members)
+          <%= radio_button_tag :size, 'Large' %> Any
+          <%= radio_button_tag :size, 'Any' %>
+      <% elsif defined?(@size) and @size == 'Large' %>
+          Small (4 members)
+          <%= radio_button_tag :size, 'Small' %> Medium (6 members)
+          <%= radio_button_tag :size, 'Medium' %> Large (12 members)
+          <%= radio_button_tag :size, 'Large', true %> Any
+          <%= radio_button_tag :size, 'Any' %>
+      <% else %>
+          Small (4 members)
+          <%= radio_button_tag :size, 'Small' %> Medium (6 members)
+          <%= radio_button_tag :size, 'Medium' %> Large (12 members)
+          <%= radio_button_tag :size, 'Large' %> Any
+          <%= radio_button_tag :size, 'Any', true %>
+      <% end %>
+
+    </div>
+    <div>
+
+      <%= label_tag :"Building" %>
+      <% if defined?(@building) and @building == 'D.H.Hill' %>
+          D.H.Hill
+          <%= radio_button_tag :building, 'D.H.Hill', true %> James.B.Hunt
+          <%= radio_button_tag :building, 'James.B.Hunt' %> Any
+          <%= radio_button_tag :building, 'Any' %>
+      <% elsif defined?(@building) and @building == 'James.B.Hunt' %>
+          D.H.Hill
+          <%= radio_button_tag :building, 'D.H.Hill' %> James.B.Hunt
+          <%= radio_button_tag :building, 'James.B.Hunt', true %> Any
+          <%= radio_button_tag :building, 'Any' %>
+      <% else %>
+          D.H.Hill
+          <%= radio_button_tag :building, 'D.H.Hill' %> James.B.Hunt
+          <%= radio_button_tag :building, 'James.B.Hunt' %> Any
+          <%= radio_button_tag :building, 'Any', true %>
+      <% end %>
+
+    </div>
+    <%= submit_tag "Search" %>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+<%if not defined?(@rooms) or @rooms.empty? %>
+    <p>There are no rooms.</p>
+<%else%>
+<h1>Rooms</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Room number</th>
+    <th>Size</th>
+    <th>Building</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @rooms.each do |room| %>
+      <tr>
+        <td><%= room.room_number %></td>
+        <td><%= room.size %></td>
+        <td><%= room.building %></td>
+        <td><%= link_to 'Book',new_booking_path(:room => room, :start_time => @search_start_time, :end_time => @search_end_time) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+<br>
+
+
+
+
+<%= link_to 'Back', bookings_path %>

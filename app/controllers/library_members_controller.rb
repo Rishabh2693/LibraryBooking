@@ -2,17 +2,29 @@ class LibraryMembersController < ApplicationController
   before_action :correct_library_member,   only: [:edit, :update]
   before_action :logged_in_library_member, only: [:index, :edit, :update, :destroy]
   before_action :admin_user,     only: :destroy
+
+  def index_admin
+    @library_members = LibraryMember.where(admin: true)
+  end
+
   def index
     @library_members = LibraryMember.all
   end
   def new
     @library_member = LibraryMember.new
   end
+  def new_admin
+    @library_member = LibraryMember.new
+  end
+
   def show
     @library_member = LibraryMember.find(params[:id])
   end
 
   def create
+    if params[:library_member][:admin] =='true'
+      params[:library_member][:admin]=true
+    end
     @library_member = LibraryMember.new(library_member_params)
     if @library_member.save
       UserNotifier.room_booking_email(@library_member).deliver
@@ -50,7 +62,7 @@ class LibraryMembersController < ApplicationController
 
   def library_member_params
     params.require(:library_member).permit(:name, :email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation,:admin)
   end
 
   def logged_in_library_member

@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
-
+<%if @rooms.empty? %>
+    <p>There are no rooms.</p>
+<%end%>
 <h1>Rooms</h1>
 
 <table>
@@ -13,15 +15,12 @@
   </thead>
 
   <tbody>
-    <% @rooms.each do |room| %>
+    <% params[:rooms].each do |room| %>
       <tr>
         <td><%= room.room_number %></td>
         <td><%= room.size %></td>
         <td><%= room.building %></td>
-        <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'History', room_history_path(room) %></td>
+        <td><%= link_to 'Book',edit_room_path(room) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Room', new_room_path %>
+<%= link_to 'Back', bookings_search_path %>

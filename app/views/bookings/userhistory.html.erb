@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Booking History</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Start</th>
+    <th>End</th>
+    <th>Room</th>
+    <th>Library member</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @history.each do |booking| %>
+      <tr>
+        <td><%= (booking.start - 0.hours).strftime("%Y-%b-%d %I%p") %></td>
+        <td><%= (booking.end - 0.hours).strftime("%Y-%b-%d %I%p") %></td>
+        <td><%= booking.room.room_number %></td>
+        <td><%= booking.library_member.email %></td>
+        <td><%= link_to 'Show', booking %></td>
+        <% if (booking.start >= Time.now.utc - 4.hours) %>
+        <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Booking', bookings_search_path %>
