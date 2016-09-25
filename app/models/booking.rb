@@ -8,7 +8,7 @@ class Booking < ApplicationRecord
     end
   end
   def start_date_validation
-    if self.start + 0.hours < DateTime.now()
+    if self.start < DateTime.now() - 4.hours
       errors.add(:start, "time should greater than current time")
     end
   end
@@ -18,7 +18,7 @@ class Booking < ApplicationRecord
     end
   end
   def end_date_validation
-    if self.end + 0.hours > 7.days.from_now
+    if self.end > 7.days.from_now - 4.hours
       errors.add(:booking, "time should be less than 7 days")
     end
   end
