@@ -24,13 +24,24 @@ class BookingsController < ApplicationController
   def search
     @rooms = []
     if params.has_key?(:start_time)
-      @search_start_time = params[:start_time]
-      start_time = DateTime.new(@search_start_time['year'].to_i ,@search_start_time['month'].to_i ,@search_start_time['day'].to_i ,@search_start_time['hour'].to_i ,00,00)
-      @search_start_time = DateTime.new(@search_start_time['year'].to_i ,@search_start_time['month'].to_i ,@search_start_time['day'].to_i ,@search_start_time['hour'].to_i ,00,00)
-      @search_end_time = params[:end_time]
-      end_time = DateTime.new(@search_end_time['year'].to_i ,@search_end_time['month'].to_i ,@search_end_time['day'].to_i ,@search_end_time['hour'].to_i ,00,00)
-      @search_end_time = DateTime.new(@search_end_time['year'].to_i ,@search_end_time['month'].to_i ,@search_end_time['day'].to_i ,@search_end_time['hour'].to_i ,00,00)
-      @rooms = Room.joins("LEFT OUTER JOIN bookings on rooms.id = bookings.room_id").where("((bookings.start not BETWEEN ? AND ?) AND (bookings.end not BETWEEN ? AND ?)) or bookings.start is null", start_time, end_time, start_time, end_time).distinct
+      @duration = params[:duration]
+      @size = params[:size]
+      @building = params[:building]
+      @search_start_time = DateTime.new(params[:start_time]['year'].to_i ,params[:start_time]['month'].to_i ,params[:start_time]['day'].to_i ,params[:start_time]['hour'].to_i ,00,00)
+      @search_end_time = @search_start_time + @duration.to_i().hours
+      subquery = Room.joins("LEFT OUTER JOIN bookings on rooms.id = bookings.room_id").where("((? >= bookings.start AND ? < bookings.end ) OR ( ? > bookings.start AND ? <= bookings.end )) or bookings.start is null", @search_start_time, @search_start_time, @search_end_time, @search_end_time).distinct.select('rooms.room_number')
+      if @size != 'Any' and @building != 'Any'
+        @rooms = Room.where(" room_number not in (?)", subquery).where(" size = ?", @size).where(" building = ?", @building)
+      elsif @size != 'Any'
+        @rooms = Room.where(" room_number not in (?)", subquery).where(" size = ?", @size)
+      elsif @building != 'Any'
+        @rooms = Room.where(" room_number not in (?)", subquery).where(" building = ?", @building)
+      else
+        @rooms = Room.where(" room_number not in (?)", subquery)
+      end
+
+
+
     end
   end
 

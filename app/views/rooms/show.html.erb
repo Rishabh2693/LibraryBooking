@@ -15,5 +15,12 @@
   <%= @room.building %>
 </p>
 
+<% if current_user.admin? and @room.has_attribute?(:email) %>
+<p>
+  <strong>Currently booked by Library Member:</strong>
+  <%= @room.email %>
+</p>
+<% end %>
+
 <%= link_to 'Edit', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>

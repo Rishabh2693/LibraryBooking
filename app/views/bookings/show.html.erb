@@ -2,12 +2,12 @@
 
 <p>
   <strong>Start:</strong>
-  <%= @booking.start %>
+  <%= (@booking.start + 4.hours).strftime("%Y-%b-%d %I%p") %>
 </p>
 
 <p>
   <strong>End:</strong>
-  <%= @booking.end %>
+  <%= (@booking.end + 4.hours).strftime("%Y-%b-%d %I%p") %>
 </p>
 
 <p>
@@ -20,5 +20,4 @@
   <%= @booking.library_member.email %>
 </p>
 
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
 <%= link_to 'Back', bookings_search_path %>
