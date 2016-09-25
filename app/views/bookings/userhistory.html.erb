@@ -20,7 +20,7 @@
         <td><%= (booking.end - 0.hours).strftime("%Y-%b-%d %I%p") %></td>
         <td><%= booking.room.room_number %></td>
         <td><%= link_to 'Show', booking %></td>
-        <% if (booking.start >= Time.now.utc - 0.hours) %>
+        <% if (booking.start >= Time.now - 0.hours) %>
         <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
