@@ -6,6 +6,7 @@
         <li><%= link_to "Home", root_path %></li>
         <% if logged_in? %>
             <% if current_user.admin? %>
+                <li><%= link_to "Manage Rooms", rooms_path %></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Manage Admins <b class="caret"></b>

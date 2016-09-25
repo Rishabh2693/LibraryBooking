@@ -5,7 +5,7 @@
       <li>
         <%= link_to library_member.name, library_member %>
         <%= library_member.email %>
-        <% if current_user.admin? && !current_user?(library_member)&& current_user.id!=1 %>
+        <% if current_user.admin? && !current_user?(library_member)&& library_member.id!=1 %>
             | <%= link_to "delete", library_member, method: :delete,
                           data: { confirm: "You sure?" } %>
         <% end %>
