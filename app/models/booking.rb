@@ -1,10 +1,15 @@
 class Booking < ApplicationRecord
   belongs_to :room
   belongs_to :library_member
-  validate :start_and_end_date_validation, :end_date_validation, :no_of_hours
+  validate :start_and_end_date_validation, :end_date_validation, :no_of_hours, :start_date_validation
   def start_and_end_date_validation
     if self.start > self.end
       errors.add(:start, "time should be less than End time")
+    end
+  end
+  def start_date_validation
+    if self.start < DateTime.now()
+      errors.add(:start, "time should greater than current time")
     end
   end
   def no_of_hours
@@ -14,7 +19,7 @@ class Booking < ApplicationRecord
   end
   def end_date_validation
     if self.end > 7.days.from_now
-      errors.add(:end, "time should be less than 7 days")
+      errors.add(:booking, "time should be less than 7 days")
     end
   end
 end

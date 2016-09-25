@@ -34,10 +34,10 @@
   <div class="field">
   <% if current_user.admin? %>
     <%= f.label :library_member_id %>
-    <%= f.text_field :library_member_id %>
+  <%= collection_select(:booking, :library_member_id, LibraryMember.where(admin: [false, nil]), :id, :email) %>
   <% else %>
     <%= f.label :library_member_id %>
-    <%= f.hidden_field :library_member_id, :value => current_user.email %>
+    <%= f.hidden_field :library_member_id, :value => current_user.id %>
     <%= current_user.email %>
   <% end %>
   </div>

@@ -58,8 +58,6 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
-    tmep = LibraryMember.find_by(email: booking_params[:library_member_id])
-    params[:booking][:library_member_id] = tmep.id
     @booking = Booking.new(booking_params)
 
     respond_to do |format|

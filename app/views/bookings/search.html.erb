@@ -1,6 +1,19 @@
 <h1> Search for available rooms</h1>
 <%= form_tag bookings_search_path, :method => 'get' do %>
 
+    <% if defined?(@booking) and @booking.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+          <ul>
+            <% @booking.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+
     <div class="field">
       <%= label_tag :"start time" %>
       <% if defined?(@search_start_time) %>
