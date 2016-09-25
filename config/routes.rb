@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get  '/signup',  to: 'library_members#new'
   get 'static_pages/help'
+  get 'static_pages/about'
   root 'static_pages#home'
   post '/signup',  to: 'library_members#create'
   get    '/login',   to: 'sessions#new'

@@ -50,10 +50,10 @@ class BookingsController < ApplicationController
 
 
   def roomhistory
-    @history = Booking.where(room_id: params[:id])
+    @history = Booking.where(room_id: params[:id]).order(:start)
   end
   def userhistory
-    @history = Booking.where(library_member_id: params[:id])
+    @history = Booking.where(library_member_id: params[:id]).order(:start)
   end
   # POST /bookings
   # POST /bookings.json
