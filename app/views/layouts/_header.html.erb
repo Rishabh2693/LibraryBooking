@@ -5,6 +5,17 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
         <% if logged_in? %>
+            <% if current_user.admin? %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Manage Admins <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Create Admin", new_admin_path %></li>
+                    <li><%= link_to "View Admin", index_admin_path %></li>
+                  </ul>
+                </li>
+                <% end %>
             <li><%= link_to "Members", library_members_path %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
