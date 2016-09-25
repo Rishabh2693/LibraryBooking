@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20160925171922) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "bookings", force: :cascade do |t|
     t.datetime "start"
     t.datetime "end"
@@ -19,8 +22,8 @@ ActiveRecord::Schema.define(version: 20160925171922) do
     t.integer  "library_member_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.index ["library_member_id"], name: "index_bookings_on_library_member_id"
-    t.index ["room_id"], name: "index_bookings_on_room_id"
+    t.index ["library_member_id"], name: "index_bookings_on_library_member_id", using: :btree
+    t.index ["room_id"], name: "index_bookings_on_room_id", using: :btree
   end
 
   create_table "library_members", force: :cascade do |t|
@@ -40,4 +43,6 @@ ActiveRecord::Schema.define(version: 20160925171922) do
     t.datetime "updated_at",  null: false
   end
 
+  add_foreign_key "bookings", "library_members"
+  add_foreign_key "bookings", "rooms"
 end
