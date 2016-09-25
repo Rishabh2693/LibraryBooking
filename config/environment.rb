@@ -5,7 +5,7 @@ require_relative 'application'
 Rails.application.initialize!
 
 ActionMailer::Base.smtp_settings = {
-  :user_name => 'library.ncstate',
+  :user_name => 'bkasliwal',
   :password => 'wonderwoman',
   :domain => 'gmail.com',
   :address => 'smtp.gmail.com',
