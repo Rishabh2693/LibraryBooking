@@ -16,8 +16,8 @@
   <tbody>
     <% @bookings.each do |booking| %>
       <tr>
-        <td><%= booking.start %></td>
-        <td><%= booking.end %></td>
+        <td><%= booking.start.strftime("%Y-%b-%d %I%p") %></td>
+        <td><%= booking.end.strftime("%Y-%b-%d %I%p") %></td>
         <td><%= booking.room.id %></td>
         <td><%= booking.library_member.email %></td>
         <td><%= link_to 'Show', booking %></td>

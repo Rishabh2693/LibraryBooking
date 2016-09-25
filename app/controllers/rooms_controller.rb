@@ -13,7 +13,7 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @temp_room = Room.joins("LEFT OUTER JOIN bookings on rooms.id = bookings.room_id").
         joins("LEFT OUTER JOIN library_members on bookings.library_member_id = library_members.id")
-                .where(" ((? between bookings.start and bookings.end) or bookings.start is null) and rooms.id = ?", Time.now - 4.hours, params[:id]).
+                .where(" ((? between bookings.start and bookings.end) or bookings.start is null) and rooms.id = ?", Time.now - 0.hours, params[:id]).
         select("rooms.*", "library_members.email").distinct().first
     if @temp_room
       @room = @temp_room
