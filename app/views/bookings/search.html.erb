@@ -19,7 +19,7 @@
       <% if defined?(@search_start_time) %>
           <%= select_datetime(@search_start_time, :discard_minute => true, :prefix => :start_time) %>
       <% else %>
-        <%= select_datetime(Time.now - 4.hours, :discard_minute => true, :prefix => :start_time) %>
+        <%= select_datetime(Time.now - 3.hours, :discard_minute => true, :prefix => :start_time) %>
       <% end %>
 </div>
     <div>
