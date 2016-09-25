@@ -2,15 +2,10 @@
   <h1>NC STATE LIBRARY</h1>
 
   <h2>
-    This is the home page for the
-    <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
+    This is the home page for the Library Booking App
   </h2>
 
   <% if not logged_in? %>
     <%= link_to "Sign up now!", new_library_member_path, class: "btn btn-lg btn-primary" %>
   <% end %>
 </div>
-
-<%= link_to image_tag("rails.png", alt: "Rails logo"),
-            'http://rubyonrails.org/' %>
