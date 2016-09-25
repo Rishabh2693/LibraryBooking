@@ -58,15 +58,23 @@ class BookingsController < ApplicationController
   # POST /bookings
   # POST /bookings.json
   def create
+    subquery = Booking.where(library_member_id: params[:booking][:library_member_id]).where("((? >= bookings.start AND ? < bookings.end ) OR ( ? > bookings.start AND ? <= bookings.end ))", DateTime.parse(params[:booking][:start]), DateTime.parse(params[:booking][:start]), DateTime.parse(params[:booking][:end]), DateTime.parse(params[:booking][:end])).first
     @booking = Booking.new(booking_params)
-
-    respond_to do |format|
-      if @booking.save
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
-        format.json { render :show, status: :created, location: @booking }
-      else
+    if subquery and !current_user.admin?
+      respond_to do |format|
+        @booking.errors.add(:you, " cannot book 2 rooms at the same time")
         format.html { render :search }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
+      end
+    else
+      respond_to do |format|
+        if @booking.save
+          format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+          format.json { render :show, status: :created, location: @booking }
+        else
+          format.html { render :search }
+          format.json { render json: @booking.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

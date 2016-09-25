@@ -15,7 +15,7 @@
   <%= @room.building %>
 </p>
 
-<% if current_user.admin? and @room.has_attribute?(:email) %>
+<% if current_user.admin? and @room.has_attribute?(:email) and @room.email %>
 <p>
   <strong>Currently booked by Library Member:</strong>
   <%= @room.email %>

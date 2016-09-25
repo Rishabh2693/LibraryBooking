@@ -11,19 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
+
+
+    <div class="field">
     <%= f.label :room_number %>
     <%= f.number_field :room_number %>
   </div>
 
   <div class="field">
     <%= f.label :size %>
-    <%= f.text_field :size %>
+    <%= f.select :size, [['Small - 4 chairs','Small'],['Medium - 6 chairs','Medium'],['Large - 12 chairs','Large']] %>
   </div>
 
   <div class="field">
     <%= f.label :building %>
-    <%= f.text_field :building %>
+    <%= f.select :building, [['D.H.Hill','D.H.hill'],['James.B.Hunt','James.B.Hunt']] %>
   </div>
 
   <div class="actions">

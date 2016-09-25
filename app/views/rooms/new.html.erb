@@ -1,15 +1,5 @@
 <h1>New Room</h1>
 
-<!--<%= render 'form', room: @room %>-->
-
-<%= form_for @room do |f| %>
-<table align = "center">
-  <tr><td><label>Room Number: </label></td><td><%= f.text_field :room_number %></td></tr>
-  <tr><td><label>Size: </label></td><td><%= f.select :size, [['Small - 4 chairs','Small'],['Medium - 6 chairs','Medium'],['Large - 12 chairs','Large']] %></td></tr>
-  <tr><td><label>Building: </label></td><td><%= f.select :building, [['D.H.Hill','D.H.hill'],['James.B.Hunt','James.B.Hunt']] %></td></tr></table>
-  <table align="center">
-  <tr><td><%= f.submit %> </td></tr>
-</table> 
-<% end %>
+<%= render 'form', room: @room %>
 
 <%= link_to 'Back', rooms_path %>
