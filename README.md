@@ -26,3 +26,5 @@ Major Features:
 
   •	Super-Admin cannot be modified or deleted by other admins.
 
+# Note:
+Please do not mess with the Super-Admin account, as there might be others also who will be using the same account for different purposes.
