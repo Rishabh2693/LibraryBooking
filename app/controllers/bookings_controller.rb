@@ -66,6 +66,8 @@ class BookingsController < ApplicationController
     else
       respond_to do |format|
         if @booking.save
+          temp_emails = params[:booking][:emails] #.split(',').strip(' ')
+          UserNotifierMailer.send_signup_email(temp_emails, @booking).deliver
           @library_member = LibraryMember.find(params[:booking][:library_member_id])
           format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
           format.json { render :show, status: :created, location: @booking }
