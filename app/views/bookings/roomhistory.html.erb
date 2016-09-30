@@ -16,13 +16,12 @@
   <tbody>
   <% @history.each do |booking| %>
       <tr>
-        <td><%= booking.start %></td>
-        <td><%= booking.end %></td>
+        <td><%= booking.start.strftime("%Y-%b-%d %I%p") %></td>
+        <td><%= booking.end.strftime("%Y-%b-%d %I%p") %></td>
         <td><%= booking.room.room_number %></td>
         <td><%= booking.library_member.email %></td>
         <td><%= link_to 'Show', booking %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <% if (booking.start >= Time.now.utc - 4.hours) %>
+        <% if (booking.start >= Time.now - 4.hours) %>
             <td><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
