@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :room
   belongs_to :library_member
+  attr_accessor :emails
   validate :start_and_end_date_validation, :end_date_validation, :no_of_hours, :start_date_validation
   def start_and_end_date_validation
     if self.start > self.end

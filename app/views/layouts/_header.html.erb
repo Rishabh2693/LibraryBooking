@@ -1,6 +1,6 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "Awesome app", root_path, id: "logo" %>
+    <%= link_to "NC STATE Library", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
@@ -9,16 +9,17 @@
                 <li><%= link_to "Manage Rooms", rooms_path %></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    Manage Admins <b class="caret"></b>
+                    Manage Users <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
                     <li><%= link_to "Create Admin", new_admin_path %></li>
                     <li><%= link_to "View Admin", index_admin_path %></li>
+                    <li><%= link_to "Create Library Member", new_admin_library_member_path %></li>
                   </ul>
                 </li>
-                <% end %>
+                <li><%= link_to "Members", library_members_path %></li>
+            <% end %>
             <li><%= link_to "Book Rooms", bookings_search_path %></li>
-            <li><%= link_to "Members", library_members_path %></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>

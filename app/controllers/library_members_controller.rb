@@ -16,6 +16,9 @@ class LibraryMembersController < ApplicationController
   def new_admin
     @library_member = LibraryMember.new
   end
+  def new_admin_library_member
+    @library_member = LibraryMember.new
+  end
 
   def show
     @library_member = LibraryMember.find(params[:id])
@@ -27,7 +30,7 @@ class LibraryMembersController < ApplicationController
     end
     @library_member = LibraryMember.new(library_member_params)
     if @library_member.save
-      log_in @library_member
+      # log_in @library_member
       flash[:success] = "Welcome to the NC State Library App!"
       redirect_to @library_member
     else

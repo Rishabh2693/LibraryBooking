@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/userhistory/:id', to: 'bookings#userhistory', via: :get, as: :user_history
   get '/index_admin', to: 'library_members#index_admin'
   get '/new_admin', to: 'library_members#new_admin'
+  get '/new_admin_library_member', to: 'library_members#new_admin_library_member'
   post '/index_admin', to: 'library_members#create_admin'
   resources :bookings
   resources :rooms
