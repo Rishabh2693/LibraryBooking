@@ -34,7 +34,7 @@ Special Scenarios:
   
 Extra Features:
 
-  •	The user can send a notification message to other library members in his/her team with the details of the reservation.
+  •	The user can send a notification message to other library members in his/her team with the details of the reservation by passing a comma separated list of the emails of his/her team members in the email section while making the reservation.
   
   • The admin make multiple reservations for a library member.
 
